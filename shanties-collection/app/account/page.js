@@ -1,10 +1,11 @@
+﻿import Link from 'next/link';
 import { requireUser } from '@/lib/auth';
 import { signOut, updateProfile } from '../auth/actions';
 
 export const dynamic = 'force-dynamic';
 export const metadata = { title: 'My account', robots: { index: false } };
 
-const SOON = ['My Orders', 'Wishlist', 'My Addresses', 'Payment Methods', 'Delivery Tracking', 'My Reviews', 'Notifications', 'Help & Support'];
+const SOON = ['Wishlist', 'My Addresses', 'Payment Methods', 'My Reviews', 'Notifications', 'Help & Support'];
 
 export default async function Account({ searchParams }) {
   const { user, profile } = await requireUser('/account');
@@ -13,6 +14,21 @@ export default async function Account({ searchParams }) {
       <h1>My account</h1>
       {searchParams.message && <p className="alert ok" role="status">{searchParams.message}</p>}
       {searchParams.error && <p className="alert err" role="alert">{searchParams.error}</p>}
+
+      <section className="auth-card">
+        <h2>Quick links</h2>
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(160px, 1fr))', gap: '.75rem' }}>
+          <Link href="/account/orders" className="btn btn-ghost" style={{ textAlign: 'center' }}>
+            🧾 My Orders
+          </Link>
+          <Link href="/cart" className="btn btn-ghost" style={{ textAlign: 'center' }}>
+            🛒 My Cart
+          </Link>
+          <Link href="/categories" className="btn btn-ghost" style={{ textAlign: 'center' }}>
+            📂 Shop
+          </Link>
+        </div>
+      </section>
 
       <section className="auth-card">
         <h2>My profile</h2>
@@ -25,7 +41,7 @@ export default async function Account({ searchParams }) {
       </section>
 
       <section className="auth-card">
-        <h2>Coming in the next step</h2>
+        <h2>Coming soon</h2>
         <ul className="soon">{SOON.map((s) => <li key={s}>{s}</li>)}</ul>
       </section>
 

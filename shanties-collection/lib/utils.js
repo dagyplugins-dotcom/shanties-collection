@@ -33,3 +33,13 @@ export function normalizePhone(input) {
 }
 
 export const isEmail = (s) => /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(String(s || ''));
+
+// Convert a product name into a URL-safe slug
+export function scSlugify(text) {
+  return String(text || '')
+    .toLowerCase()
+    .replace(/&/g, ' ')
+    .replace(/['']/g, '')
+    .replace(/[^a-z0-9]+/g, '-')
+    .replace(/^-+|-+$/g, '');
+}

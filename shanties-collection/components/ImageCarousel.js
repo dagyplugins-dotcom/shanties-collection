@@ -1,4 +1,4 @@
-'use client';
+﻿'use client';
 import Image from 'next/image';
 import Link from 'next/link';
 import { useCallback, useEffect, useRef, useState } from 'react';
@@ -25,7 +25,6 @@ export default function ImageCarousel({ banners }) {
     if (el) setI(Math.round(el.scrollLeft / el.clientWidth));
   };
 
-  // Auto-rotate; pauses on hover/touch/focus, via the pause button, and for reduced-motion users.
   useEffect(() => {
     if (!playing || held || n < 2) return;
     if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
@@ -38,8 +37,8 @@ export default function ImageCarousel({ banners }) {
       className="carousel"
       aria-roledescription="carousel"
       aria-label="Promotions"
-      onPointerEnter={() => setHeld(true)}
-      onPointerLeave={() => setHeld(false)}
+      onMouseEnter={() => setHeld(true)}
+      onMouseLeave={() => setHeld(false)}
       onFocus={() => setHeld(true)}
       onBlur={() => setHeld(false)}
     >
@@ -47,7 +46,15 @@ export default function ImageCarousel({ banners }) {
         {slides.map((s, k) => (
           <div key={s.id} className={`slide${s.image_url ? '' : ' kanga'}`} role="group" aria-roledescription="slide" aria-label={`${k + 1} of ${n}`}>
             {s.image_url && (
-              <Image src={s.image_url} alt="" fill priority={k === 0} sizes="100vw" className="cover" />
+              <Image
+                src={s.image_url}
+                alt=""
+                fill
+                priority={k === 0}
+                sizes="100vw"
+                className="cover"
+                draggable={false}
+              />
             )}
             {(s.title || s.subtitle || s.button_text) && (
               <div className={`slide-text${s.image_url ? ' on-image' : ''}`}>
