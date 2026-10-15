@@ -939,3 +939,41 @@ button { cursor: pointer; }
   .hero-sidebar-dot, .hero-sidebar-arrow { display: none; }
   .hero-sidebar-link:hover { background: #fdf3f6; }
 }
+
+/* ═══════════════ MOBILE CAROUSEL — fill the top properly ═══════════════ */
+@media (max-width: 900px) {
+  /* Give the slide a taller, phone-friendly shape */
+  .slide {
+    aspect-ratio: 4 / 3;
+    min-height: 260px;
+  }
+
+  /* Keep the middle of the image visible (no more side-cropping) */
+  .slide img.cover {
+    object-position: center center;
+  }
+
+  /* Make the text overlay comfortable on small screens */
+  .slide-text {
+    padding: 18px 18px 32px;
+  }
+  .slide-text h2 { font-size: 1.35rem; }
+  .slide-text p  { font-size: .95rem; }
+
+  /* Full-bleed look: carousel extends to screen edges */
+  .hero-row {
+    padding-left: 0;
+    padding-right: 0;
+  }
+  .hero-main .carousel {
+    border-radius: 0;
+  }
+}
+
+/* Very small phones (iPhone SE, older Androids) */
+@media (max-width: 420px) {
+  .slide {
+    aspect-ratio: 1 / 1;   /* square — safest for tall phones */
+    min-height: 240px;
+  }
+}
