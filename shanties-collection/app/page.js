@@ -1,4 +1,4 @@
-import Link from 'next/link';
+﻿import Link from 'next/link';
 import ImageCarousel from '@/components/ImageCarousel';
 import CategoryCard from '@/components/CategoryCard';
 import ProductGrid from '@/components/ProductGrid';
@@ -20,11 +20,38 @@ export default async function Home() {
           The store isn&apos;t connected to its database yet. Add your Supabase keys in the environment settings, then redeploy.
         </div>
       )}
-      <div className="container hero-wrap"><ImageCarousel banners={home.banners} /></div>
 
+      {/* ─── Hero row: left sidebar + right carousel ─── */}
+      <div className="container hero-row">
+        {categories.length > 0 && (
+          <aside className="hero-sidebar" aria-label="Shop by category">
+            <h2 className="hero-sidebar-title">Category</h2>
+            <ul>
+              {categories.map((c) => (
+                <li key={c.id}>
+                  <Link href={`/category/${c.slug}`} className="hero-sidebar-link">
+                    <span className="hero-sidebar-dot" aria-hidden="true" />
+                    <span className="hero-sidebar-name">{c.name}</span>
+                    <span className="hero-sidebar-arrow" aria-hidden="true">›</span>
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </aside>
+        )}
+
+        <div className="hero-main">
+          <ImageCarousel banners={home.banners} />
+        </div>
+      </div>
+
+      {/* ─── Shop by category tiles ─── */}
       {on('categories') && categories.length > 0 && (
         <section className="container section" aria-labelledby="h-cats">
-          <div className="section-head"><h2 id="h-cats">{title('categories', 'Shop by category')}</h2><Link href="/categories">See all</Link></div>
+          <div className="section-head">
+            <h2 id="h-cats">{title('categories', 'Shop by category')}</h2>
+            <Link href="/categories">See all</Link>
+          </div>
           <div className="cat-grid">
             {categories.map((c, i) => <CategoryCard key={c.id} category={c} index={i} />)}
           </div>
