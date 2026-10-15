@@ -618,3 +618,23 @@ button { cursor: pointer; }
   user-select: none;
   -webkit-user-select: none;
 }
+
+/* ═══════════════════ ADMIN ICONS — SVG ═══════════════════ */
+.admin-nav-icon {
+  width: 1.25rem;
+  height: 1.25rem;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  color: #f2b6c1;
+  flex-shrink: 0;
+}
+.admin-nav-link:hover .admin-nav-icon { color: #fff; }
+
+.admin-stat-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--brand);
+  margin-bottom: .35rem;
+}

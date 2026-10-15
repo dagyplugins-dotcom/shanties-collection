@@ -1,6 +1,7 @@
 ﻿import Link from 'next/link';
 import { redirect } from 'next/navigation';
 import { createClient } from '@/lib/supabase/server';
+import Icon from '@/components/Icon';
 
 export const metadata = {
   title: 'Admin — Shanties Collection',
@@ -8,13 +9,13 @@ export const metadata = {
 };
 
 const NAV = [
-  { href: '/admin', label: 'Dashboard', icon: '📊' },
-  { href: '/admin/products', label: 'Products', icon: '📦' },
-  { href: '/admin/orders', label: 'Orders', icon: '🧾' },
-  { href: '/admin/categories', label: 'Categories', icon: '🗂️' },
-  { href: '/admin/delivery', label: 'Delivery', icon: '🚚' },
-  { href: '/admin/homepage', label: 'Homepage', icon: '🖼️' },
-  { href: '/admin/settings', label: 'Settings', icon: '⚙️' },
+  { href: '/admin', label: 'Dashboard', icon: 'grid' },
+  { href: '/admin/products', label: 'Products', icon: 'box' },
+  { href: '/admin/orders', label: 'Orders', icon: 'receipt' },
+  { href: '/admin/categories', label: 'Categories', icon: 'folder' },
+  { href: '/admin/delivery', label: 'Delivery', icon: 'truck' },
+  { href: '/admin/homepage', label: 'Homepage', icon: 'image' },
+  { href: '/admin/settings', label: 'Settings', icon: 'settings' },
 ];
 
 export default async function AdminLayout({ children }) {
@@ -42,14 +43,14 @@ export default async function AdminLayout({ children }) {
         <nav className="admin-nav">
           {NAV.map((item) => (
             <Link key={item.href} href={item.href} className="admin-nav-link">
-              <span className="admin-nav-icon">{item.icon}</span>
+              <span className="admin-nav-icon"><Icon name={item.icon} size={18} /></span>
               <span>{item.label}</span>
             </Link>
           ))}
         </nav>
         <div className="admin-sidebar-footer">
           <Link href="/" className="admin-nav-link" target="_blank" rel="noopener">
-            <span className="admin-nav-icon">🌐</span>
+            <span className="admin-nav-icon"><Icon name="globe" size={18} /></span>
             <span>View store</span>
           </Link>
         </div>

@@ -1,11 +1,11 @@
 ﻿import Link from 'next/link';
 import { createClient } from '@/lib/supabase/server';
 import { formatKSh } from '@/lib/utils';
+import Icon from '@/components/Icon';
 
 export default async function AdminDashboard() {
   const supabase = createClient();
 
-  // Today's start
   const startOfToday = new Date();
   startOfToday.setHours(0, 0, 0, 0);
 
@@ -48,11 +48,11 @@ export default async function AdminDashboard() {
   const todaySales = (todaySalesData || []).reduce((s, o) => s + Number(o.total || 0), 0);
 
   const stats = [
-    { label: "Today's orders", value: todayOrders ?? 0, icon: '🧾' },
-    { label: "Today's sales", value: formatKSh(todaySales), icon: '💰' },
-    { label: 'Pending payment', value: pendingOrders ?? 0, icon: '⏳' },
-    { label: 'Active products', value: totalProducts ?? 0, icon: '📦' },
-    { label: 'Customers', value: totalCustomers ?? 0, icon: '👥' },
+    { label: "Today's orders", value: todayOrders ?? 0, icon: 'receipt' },
+    { label: "Today's sales", value: formatKSh(todaySales), icon: 'coins' },
+    { label: 'Pending payment', value: pendingOrders ?? 0, icon: 'clock' },
+    { label: 'Active products', value: totalProducts ?? 0, icon: 'box' },
+    { label: 'Customers', value: totalCustomers ?? 0, icon: 'users' },
   ];
 
   return (
@@ -62,7 +62,7 @@ export default async function AdminDashboard() {
       <div className="admin-stats">
         {stats.map((s) => (
           <div key={s.label} className="admin-stat-card">
-            <span className="admin-stat-icon">{s.icon}</span>
+            <span className="admin-stat-icon"><Icon name={s.icon} size={22} /></span>
             <span className="admin-stat-label">{s.label}</span>
             <strong className="admin-stat-value">{s.value}</strong>
           </div>
