@@ -23,7 +23,6 @@ export default async function Categories() {
       <h1>Shop by category</h1>
 
       <div className="cat-layout">
-        {/* ─── Left sidebar (vertical) ─── */}
         <aside className="cat-sidebar" aria-label="Categories">
           <h2 className="cat-sidebar-title">Category</h2>
           <ul>
@@ -39,7 +38,6 @@ export default async function Categories() {
           </ul>
         </aside>
 
-        {/* ─── Right main area (horizontal tile grid) ─── */}
         <div className="cat-main">
           <div className="cat-grid">
             {categories.map((c) => (
