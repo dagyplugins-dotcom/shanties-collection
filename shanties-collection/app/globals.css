@@ -977,3 +977,41 @@ button { cursor: pointer; }
     min-height: 240px;
   }
 }
+
+/* ═══════════ FIX: kill horizontal overflow on mobile ═══════════ */
+html, body {
+  overflow-x: hidden;
+  max-width: 100%;
+}
+
+/* Ensure every container stays inside the viewport */
+.container {
+  max-width: 100%;
+  box-sizing: border-box;
+}
+
+/* Undo the risky full-bleed change — let the container handle padding */
+@media (max-width: 900px) {
+  .hero-row {
+    padding-left: 0;
+    padding-right: 0;
+    overflow: hidden;
+  }
+
+  /* Constrain every wrapper in the chain */
+  .hero-main,
+  .hero-main .carousel,
+  .hero-main .slides,
+  .hero-main .slide {
+    max-width: 100%;
+    box-sizing: border-box;
+  }
+
+  /* Belt and suspenders: ensure horizontal strips can't expand the page */
+  .hero-sidebar ul,
+  .cat-sidebar ul,
+  .cat-strip ul {
+    max-width: 100%;
+    box-sizing: border-box;
+  }
+}
