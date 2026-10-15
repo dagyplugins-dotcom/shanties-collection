@@ -1015,3 +1015,57 @@ html, body {
     box-sizing: border-box;
   }
 }
+
+/* ══════════════════════════════════════════════════════════════
+   MOBILE HOMEPAGE — hide sidebar, keep carousel, cleaner tiles
+   Desktop (>900px) keeps sidebar + carousel side-by-side.
+   ══════════════════════════════════════════════════════════════ */
+@media (max-width: 900px) {
+  /* Kill the horizontal category strip inside the hero row on mobile */
+  .hero-sidebar {
+    display: none !important;
+  }
+
+  /* Hero row = just the carousel, full width, no gaps */
+  .hero-row {
+    grid-template-columns: 1fr;
+    gap: 0;
+    padding-left: 0;
+    padding-right: 0;
+    overflow: hidden;
+  }
+
+  .hero-main,
+  .hero-main .carousel,
+  .hero-main .slides,
+  .hero-main .slide {
+    width: 100%;
+    max-width: 100%;
+    box-sizing: border-box;
+  }
+
+  .hero-main .carousel {
+    border-radius: 0;
+  }
+
+  /* Belt-and-suspenders: block horizontal scroll / whitespace on right */
+  html, body {
+    overflow-x: hidden;
+    max-width: 100%;
+  }
+
+  /* Category tiles: 2 per row on phones */
+  .cat-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: .75rem;
+  }
+}
+
+/* Wider phones / small tablets: 3 tiles per row */
+@media (min-width: 560px) and (max-width: 900px) {
+  .cat-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+/* Small desktop window (just above the 900 cutoff) keeps sidebar — no change needed */
